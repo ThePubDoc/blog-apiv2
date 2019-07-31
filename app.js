@@ -27,7 +27,7 @@ app.set('view engine','ejs');
 app.use(express.static(path.resolve(__dirname, 'client')));
 app.use(logger('dev')); 
 app.use('/', mainRoutes);                                       
-app.set('port', process.env.PORT || 4000);                      
+app.set('port', process.env.PORT || 3002);                      
 app.listen(app.get('port'),() => {                              
 	console.log('Application running in port: '+ app.get('port'));
 });

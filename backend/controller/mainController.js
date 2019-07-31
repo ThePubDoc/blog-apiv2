@@ -96,6 +96,34 @@ function profile(req,res){
     }
 }
 
+function blog(req,res){
+    if(req.session.user){
+        let {id} = req.query;
+        console.log(id);
+        Blog.findOne({
+            where : {
+                id : id
+            }
+        })
+        .then(blog => {
+            Comment.findAll({
+                where: {
+                    blogId : id,
+                }
+            })
+            .then(result => {
+                res.render("blog",{
+                    blog : blog,
+                    result : result
+                })
+            })
+        })
+    }
+    else{
+        res.redirect("login")
+    }
+}
+
 function logout(req,res){
     req.session.destroy(function(){
         console.log("user logged out.")
@@ -137,131 +165,183 @@ function deleteBlog(req,res){
 function likePost(req,res){
     if(req.session.user){
         const blogId = req.body.blogId;
-        const userId = req.session.user.userId
-        console.log("like ke andar ka ",blogId);
-        console.log("like ke andar ka ",req.session.user)
-        Like.create({
-            blogId,
-            userId
+        const userId = req.session.user.userId;
+        Dislike.destroy({
+            where : {
+                blogId : blogId,
+                userId : userId
+            }
         })
-        .then(likes => {
-            console.log("Like first call")
-            Dislike.destroy({
+        .then(dislike => {
+            Dislike.findAll({
                 where : {
                     blogId : blogId,
-                    userId : userId,
                 }
             })
-            .then(result => {
-                console.log("Destroy ",result)
-                if(result === 1){
-                    Blog.findOne({
-                        where : {
-                            id : blogId
-                        }
-                    })
-                    .then(blog => {
-                        let totalLikes = blog.likes+1;
-                        let totalDislikes = blog.dislikes-1;
-                        Blog.update({
-                            likes : totalLikes,
-                            dislikes : totalDislikes
-                        }, {
+            .then(totalDislikes => {
+                Like.findAll({
+                    where : {
+                        userId : userId,
+                        blogId : blogId,
+                    }
+                })
+                .then(like_res => {
+                    if(like_res.length === 0){
+                        console.log(like_res)
+                        Like.create({
+                            blogId,
+                            userId
+                        })
+                        .then(like => {
+                            Like.findAll({
+                                where : {
+                                    blogId : blogId
+                                }
+                            })
+                            .then(totalLikes => {
+                                Blog.update({
+                                    likes : totalLikes.length,
+                                    dislikes : totalDislikes.length,
+                                }, {
+                                    where : {
+                                        id : blogId
+                                    }
+                                })
+                                .then(blog => {
+                                    let data = {
+                                        totalLikes : totalLikes.length,
+                                        totalDislikes : totalDislikes.length
+                                    }
+                                    res.json(data);
+                                })
+                            })
+                        })
+                    }
+                    else{
+                        Like.destroy({
                             where : {
-                                id : blogId
+                                blogId : blogId,
+                                userId : userId,
                             }
                         })
-                        .then(finalResult => {
-                            res.json(result)
+                        .then(like => {
+                            Like.findAll({
+                                where : {
+                                    blogId : blogId
+                                }
+                            })
+                            .then(totalLikes => {
+                                Blog.update({
+                                    likes : totalLikes.length,
+                                },{
+                                    where :{
+                                        id : blogId
+                                    }
+                                })
+                                .then(blog => {
+                                    let data = {
+                                        totalLikes : totalLikes.length,
+                                        totalDislikes : totalDislikes.length
+                                    }
+                                    res.json(data);
+                                })
+                            })
                         })
-                    })
-                }
-                else{
-                    Blog.findOne({
-                        where : {
-                            id : blogId
-                        }
-                    })
-                    .then(blog => {
-                        let totalLikes = blog.likes+1;
-                        Blog.update({
-                            likes : totalLikes,
-                        }, {
-                            where : {
-                                id : blogId
-                            }
-                        })
-                        .then(finalResult => {
-                            res.json(result)
-                        })
-                    })
-                }
+                    }
+                })
             })
         })
+        
     }
 }
 
 function dislikePost(req,res){
     if(req.session.user){
         const blogId = req.body.blogId;
-        const userId = req.session.user.userId
-        console.log("dislike ke andar ka ",blogId);
-        console.log("dislike ke andar ka ",req.session.user)
-        Dislike.create({
-            blogId,
-            userId
+        const userId = req.session.user.userId;
+        Like.destroy({
+            where : {
+                blogId : blogId,
+                userId : userId
+            }
         })
-        .then(dislikes => {
-            Like.destroy({
+        .then(like => {
+            Like.findAll({
                 where : {
                     blogId : blogId,
-                    userId : userId,
                 }
             })
-            .then(result => {
-                if(result === 1){
-                    Blog.findOne({
-                        where : {
-                            id : blogId
-                        }
-                    })
-                    .then(blog => {
-                        let totalLikes = blog.likes-1;
-                        let totalDislikes = blog.dislikes+1;
-                        Blog.update({
-                            likes : totalLikes,
-                            dislikes : totalDislikes
-                        }, {
+            .then(totalLikes => {
+                Dislike.findAll({
+                    where : {
+                        userId : userId,
+                        blogId : blogId,
+                    }
+                })
+                .then(dislike_res => {
+                    if(dislike_res.length === 0){
+                        console.log(dislike_res)
+                        Dislike.create({
+                            blogId,
+                            userId
+                        })
+                        .then(dislike => {
+                            Dislike.findAll({
+                                where : {
+                                    blogId : blogId
+                                }
+                            })
+                            .then(totalDislikes => {
+                                Blog.update({
+                                    dislikes : totalDislikes.length,
+                                }, {
+                                    where : {
+                                        id : blogId
+                                    }
+                                })
+                                .then(blog => {
+                                    let data = {
+                                        totalLikes : totalLikes.length,
+                                        totalDislikes : totalDislikes.length
+                                    }
+                                    res.json(data);
+                                })
+                            })
+                        })
+                    }
+                    else{
+                        Dislike.destroy({
                             where : {
-                                id : blogId
+                                blogId : blogId,
+                                userId : userId,
                             }
                         })
-                        .then(finalResult => {
-                            res.json(result)
+                        .then(dislike => {
+                            Dislike.findAll({
+                                where : {
+                                    blogId : blogId
+                                }
+                            })
+                            .then(totalDislikes => {
+                                Blog.update({
+                                    dislikes : totalDislikes.length,
+                                    likes : totalLikes.length,
+                                },{
+                                    where :{
+                                        id : blogId
+                                    }
+                                })
+                                .then(blog => {
+                                    let data = {
+                                        totalLikes : totalLikes.length,
+                                        totalDislikes : totalDislikes.length
+                                    }
+                                    res.json(data);
+                                })
+                            })
                         })
-                    })
-                }
-                else{
-                    Blog.findOne({
-                        where : {
-                            id : blogId
-                        }
-                    })
-                    .then(blog => {
-                        let totalDislikes = blog.dislikes+1;
-                        Blog.update({
-                            dislikes: totalDislikes
-                        }, {
-                            where : {
-                                id : blogId
-                            }
-                        })
-                        .then(finalResult => {
-                            res.json(result)
-                        })
-                    })
-                }
-                
+                    }
+                })
             })
         })
     }
@@ -271,7 +351,7 @@ function createComment(req,res){
     if(req.session.user){
         const userId = req.session.user.userId;
         const blogId = req.body.blogId;
-        const comment = req.body.comm;
+        const comment = req.body.comment;
         const name = req.session.user.name
         const email = req.session.user.id
         console.log(blogId)
@@ -286,7 +366,7 @@ function createComment(req,res){
         })
         .then(comm => {
             let data = {
-                comm : comm,
+                comment : comm,
                 name : req.session.user.name,
                 email : req.session.user.id,
             }
@@ -307,4 +387,5 @@ module.exports = {
     likePost : likePost,
     dislikePost : dislikePost,
     createComment : createComment,
+    blog : blog
 }

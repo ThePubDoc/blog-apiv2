@@ -24,6 +24,7 @@ router.route('/createBlog').get(mainController.createBlog);
 router.route('/createBlog').post(blogController.createBlog);
 
 router.route('/myBlogs').get(mainController.myBlogs);
+router.route('/blog').get(mainController.blog);
 
 router.route('/delete').post(mainController.deleteBlog);
 

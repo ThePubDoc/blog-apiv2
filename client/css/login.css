@@ -1,0 +1,51 @@
+.container {
+    background: url(../img/post-bg.jpg);
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+}
+
+.navbar {
+    margin-left: 22%;
+    margin-top: 20px;
+    font-weight:800;
+    font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 1.25rem;
+    color: white
+}
+/* 
+.container .overlay {
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background-color:#212529;
+    opacity:.5
+} */
+
+.container .login-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20%;
+    margin-bottom: 25%;
+    /* margin: 25%; */
+    /* margin-left: 40%; */
+    align-items: center;
+}
+
+input {
+    margin: 10px;
+    width: 20%;
+    height: 20px;
+}
+
+button {
+    margin: 10px;
+    width: 5%
+}

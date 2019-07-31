@@ -21,6 +21,8 @@
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"
+    />
 </head>
 
 <body>
@@ -56,52 +58,61 @@
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <header class="masthead" style="background-image: url('img/post-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>Hello!!!</h1>
-            <span class="subheading"><%= name %></span>
+          <div class="post-heading">
+            <h1><%= blog.blog_heading %></h1>
+            <span class="meta">Posted by
+              <a href="#"><%= blog.name %></a>
+              on <%= blog.createdAt %></span>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <% for (i in blogs) {  %>  
-        <div class="post-preview">
-            <h2 onclick="blog(<%= blogs[i].id %>)" class="post-title"><%= blogs[i].blog_heading %></h2>
-            <!-- <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
-            </h3> -->
-          <p class="post-meta">Posted by
-            <a href="#"><%= blogs[i].name %></a>
-            on <%= blogs[i].createdAt %></p>
-        </div>
-        <hr>
-        <% } %>
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">
-              I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-            </h2>
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+    
+          <a href="#">
+            <img class="img-fluid" src="img/post-sample-image.jpg" alt="">
           </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 18, 2019</p>
+
+          <p><%= blog.blog %></p>
+          <hr>
+          <div class="comment" id="commentDisplay">
+            <% for(i in result) { %>
+                <h5><%= result[i].name %></h5>
+                <p> <%= result[i].comment %></p>
+                <hr>
+          <% } %>
         </div>
-        <hr>
-        <!-- Pager -->
-        
+        </div>
+      </div>
+      <div class="container">
+            <label for="likes" id="likes" ><%= blog.likes %></label>
+            <button name="like" id="like" onclick="like(<%= blog.id %>)">
+                <i class="fas fa-thumbs-up"></i>
+            </button> 
+
+            <label for="dislikes" id="dislikes" ><%= blog.dislikes %></label>
+            <button name="dislike" id="dislike" onclick="dislike(<%= blog.id %>)">
+                <i class="fas fa-thumbs-up"></i>
+            </button>
+
+            <input name="comment" id="comment">
+            <button name="comments" id="comment" onclick="comment(<%= blog.id %>)">
+                <i class="fas fa-comments"></i>
+            </button> 
       </div>
     </div>
-  </div>
+  </article>
 
   <hr>
 
@@ -148,11 +159,7 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
-  <script>
-      function blog(i){
-          window.location = "/blog?id="+ i ;
-      }
-  </script>
+  <script src="js/blog.js"></script>
 </body>
 
 </html>
