@@ -34,14 +34,18 @@ function signup(req,res){
 
 
 function createBlog(req,res){
-    res.render("createBlog")
+    if(req.session.user){
+        res.render("createBlog")
+    }
+    else{
+        res.redirect("/")
+    }
 }
 
-function profile(req,res){
+function homepage(req,res){
     let likedPosts = [];
     let dislikedPosts = [];
     if(req.session.user){
-        console.log("profile ka redirect pr req header ",req.session.user);
         const email = req.session.user.id;
         const name = req.session.user.name;
         const userId = req.session.user.userId;
@@ -78,7 +82,7 @@ function profile(req,res){
                         blogComments = comments;
                         
                         
-                        res.render("profile",{ 
+                        res.render("homepage",{ 
                             id : email,
                             blogs : blogs,
                             name : name,
@@ -131,21 +135,27 @@ function logout(req,res){
     res.redirect('/home');
 }
 
-function myBlogs(req,res){
-    const email = req.session.user.id;
+function profile(req,res){
+    
+    if(req.session.user){  
+        const email = req.session.user.id;
     const name = req.session.user.name;
-    Blog.findAll({
-            where : {
-                email : email
-            }
-        })
-        .then(my_blogs => {
-            res.render("myBlogs",{ 
-                id : email,
-                my_blogs : my_blogs,
-                name : name,
-            });
-        })
+        Blog.findAll({
+                where : {
+                    email : email
+                }
+            })
+            .then(my_blogs => {
+                res.render("profile",{ 
+                    id : email,
+                    my_blogs : my_blogs,
+                    name : name,
+                });
+            })
+        }
+        else{
+            res.redirect("/")
+        }
 }
 
 function deleteBlog(req,res){
@@ -382,10 +392,10 @@ module.exports = {
     createBlog : createBlog,
     profile : profile,
     logout : logout,
-    myBlogs : myBlogs,
     deleteBlog : deleteBlog,
     likePost : likePost,
     dislikePost : dislikePost,
     createComment : createComment,
-    blog : blog
+    blog : blog,
+    homepage :homepage
 }

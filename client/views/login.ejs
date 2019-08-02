@@ -22,11 +22,15 @@
             <nav class="navbar">
                 <div class="title">Konfinity Blogs</div>
             </nav>
-
-            <form method="POST" action="/login" class="login-container">
+            <div class="login-controller">
+            <form method="POST" action="/login" >
                 <input type="email" name="email" placeholder="email">
                 <input type="password" name="password" placeholder="password">
                 <button>Login</button>
+            </form>
+        </div>
+            <form method="GET" action="/signup" class="login-controller">
+                <button>Sign Up</button>
             </form>
     </body>
 </html>

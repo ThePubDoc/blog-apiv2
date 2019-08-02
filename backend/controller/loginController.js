@@ -28,7 +28,7 @@ function login(req,res){
             
             req.session.user = newUser;
             console.log(req.session.user);
-            return res.redirect('/profile');
+            return res.redirect('/');
             
         })
         .catch(err => {

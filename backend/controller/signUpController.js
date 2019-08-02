@@ -33,7 +33,7 @@ function signup(req, res) {
                                 };
                 console.log(newUser);
                 req.session.user = newUser;
-                return res.redirect('/profile');
+                return res.redirect('/');
                 return res.render("profile", {
                     msg: "User successfully created",
                     user: user.name,
