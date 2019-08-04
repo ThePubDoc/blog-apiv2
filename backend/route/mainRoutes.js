@@ -32,4 +32,7 @@ router.route('/likePost').post(mainController.likePost);
 router.route('/dislikePost').post(mainController.dislikePost);
 router.route('/comment').post(mainController.createComment);
 
+router.route('/editBlog').get(mainController.editBlog);
+router.route('/editBlog').post(blogController.editBlog)
+
 module.exports = router;

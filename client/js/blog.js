@@ -12,8 +12,8 @@ function like(id){
     .then(async response => {
         const res = await response.json()
         console.log(res)
-        document.getElementById("likes").innerHTML = res.totalLikes;
-        document.getElementById("dislikes").innerHTML = res.totalDislikes;
+        document.getElementById("likesLabel").innerHTML = res.totalLikes;
+        document.getElementById("dislikesLabel").innerHTML = res.totalDislikes;
     })     
 }
 
@@ -31,13 +31,14 @@ function dislike(id){
     .then(async response => {
         const res = await response.json()
         console.log(res)
-        document.getElementById("dislikes").innerHTML = res.totalDislikes;
-        document.getElementById("likes").innerHTML = res.totalLikes;
+        document.getElementById("dislikesLabel").innerHTML = res.totalDislikes;
+        document.getElementById("likesLabel").innerHTML = res.totalLikes;
     })     
 }
 
 function comment(id){
     let comment = document.getElementById("comment").value;
+    console.log(comment)
     let data = {
         blogId : id,
         comment : comment
@@ -50,16 +51,18 @@ function comment(id){
       },
     })
     .then(async res => {
-        let response = await res.json();
-        let commentUser = document.createElement("h5");
-        let commentBody = document.createElement("p")
-        let line = document.createElement("hr")
+        console.log("total com--",response.result.length)
+        let strong = document.createElement("strong")
+        let p = document.createElement("p")
         let commentUserText = document.createTextNode(response.name)
         let commentBodyText = document.createTextNode(response.comment.comment)
-        commentUser.appendChild(commentUserText)
-        commentBody.appendChild(commentBodyText)
-        document.getElementById("commentDisplay").appendChild(commentUser);
-        document.getElementById("commentDisplay").appendChild(commentBody);
+        // console.log(commentUserText)
+        // console.log(commentBodyText)
+        strong.appendChild(commentUserText)
+        p.appendChild(commentBodyText)
+        strong.appendChild(p)
+        document.getElementById("totalComments").innerHTML = response.result.length
+        document.getElementById("commentDisplay").appendChild(strong);
         document.getElementById("comment").value = "";
     })
 }

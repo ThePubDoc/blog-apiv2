@@ -138,14 +138,16 @@ function logout(req,res){
 function profile(req,res){
     
     if(req.session.user){  
+        console.log(req.session.user)
         const email = req.session.user.id;
-    const name = req.session.user.name;
+        const name = req.session.user.name;
         Blog.findAll({
                 where : {
                     email : email
                 }
             })
             .then(my_blogs => {
+                console.log(my_blogs)
                 res.render("profile",{ 
                     id : email,
                     my_blogs : my_blogs,
@@ -161,13 +163,14 @@ function profile(req,res){
 function deleteBlog(req,res){
     if(req.session.user){
         const id = req.body.id;
+        console.log(id)
         Blog.destroy({
             where : {
                 id : id,
             }
         })
         .then(result => {
-            res.redirect("profile")
+            res.redirect("/profile")
         })
     }
 }
@@ -375,15 +378,45 @@ function createComment(req,res){
             userId,
         })
         .then(comm => {
-            let data = {
-                comment : comm,
-                name : req.session.user.name,
-                email : req.session.user.id,
-            }
-            res.json(data)
+            Comment.findAll({
+                where : {
+                    blogId : blogId
+                }
+            })
+            .then(result => {
+                let data = {
+                    comment : comm,
+                    name : req.session.user.name,
+                    email : req.session.user.id,
+                    result : result
+                }
+                res.json(data)
+            })
         })
     }
 }
+
+function editBlog(req, res){
+    console.log("req--",req.query);
+    const id = req.query.id;
+    req.session.editId = id;
+    Blog.findOne({
+      where: {
+        id: id
+      }
+    })
+    .then(blog => {
+        const blogHeading = blog.blog_heading;
+        const blogContent = blog.blog;
+        console.log(blog);
+        console.log(blogHeading)
+        res.render("editblog" , {
+            blogHeading : blogHeading,
+            blogContent : blogContent,
+            blogId : id
+        })
+    });
+};
 
 module.exports = {
     home : home,
@@ -397,5 +430,6 @@ module.exports = {
     dislikePost : dislikePost,
     createComment : createComment,
     blog : blog,
-    homepage :homepage
+    homepage :homepage,
+    editBlog : editBlog
 }

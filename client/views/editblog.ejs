@@ -31,51 +31,35 @@
           <li id="exit" class="exit-btn hide-desktop">
             <button><i class="far fa-times-circle"></i></button>
           </li>
-          <li><a href="/createBlog">Post a new Blog</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="/profile">Profile</a></li>
           <li><a href="/logout">Log Out</a></li>
         </ul>
       </nav>
     </header>
-    <div class="main-container">
-      <section id="All-blogs">
-        <div class="heading">
-          Hello <%= name%>! Here are all the blogs posted by you.
-        </div>
-        <div class="allblogs-container">
-          <% for (i in my_blogs) { %>
-
-          <div class="blog">
-            <a><%= my_blogs[i].blog_heading %></a>
-            <p>By <%= my_blogs[i].name %> on <%= my_blogs[i].createdAt %></p>
-
-            <!-- <form method="post" action="/delete" class="edit-del">
-              <button><i class="fas fa-edit"></i></button>
-              <button name="id" value="<%= my_blogs[i].id %>">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </form> -->
-            
-            
-            <div class="edit-del">
-              
-              <!-- <form method="GET" action="/editBlog">
-                <button><i class="fas fa-edit"></i></button>
-              </form> -->
-              <button onclick="edit(<%= my_blogs[i].id %>)"><i class="fas fa-edit"></i></button>
-
-              <form method="post" action="/delete">
-                <button name="id" value="<%= my_blogs[i].id %>">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-              </form>
-
-            </div>
+    <div class="index-bg">
+      <div class="empty-container">
+        <form class="main-container" method="POST" action="/editBlog">
+          <div class="heading">Add a blog</div>
+          <div>
+            <input placeholder="Blog Heading" type="text" name="blog_heading" value="<%= blogHeading %>"/>
           </div>
-
-          <% } %>
-        </div>
-      </section>
+          <div>
+            <textarea
+              rows="10"
+              placeholder="Blog Content"
+              type="text"
+              name="blog"
+            ><%= blogContent %></textarea>
+          </div>
+          <!-- <textarea name="blogId" -->
+          <div>
+            <button type="submit" name="blogId" value="<%= blogId %>" class="form-btn2">
+              Edit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
     <footer>
       Developed with <i class="fas fa-heart"></i> at
@@ -95,11 +79,6 @@
         nav.classList.toggle("hide-mobile");
         e.preventDefault();
       });
-    </script>
-    <script>
-      function edit(id){
-        window.location = "/editBlog?id=" + id;
-      }
     </script>
   </body>
 </html>
