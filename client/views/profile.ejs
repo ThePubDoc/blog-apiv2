@@ -1,130 +1,84 @@
+<!DOCTYPE html>
 <html>
-    <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <meta name="description" content="">
-            <meta name="author" content="">
-              
-            <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
-            <!-- Custom fonts for this template -->
-            <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-            <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-            <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    
-            <!-- Custom styles for this template -->
-            <link href="css/clean-blog.min.css" rel="stylesheet">
-    </head>
-    
-    <body>
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container">
-          <a class="navbar-brand" href="index.html">Konfinity Blogs</a>
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/createBlog">Create Blog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Blogs</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Didact Gothic"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <img src="assets/kflogo.png" alt="logo" class="logo" />
+        <a href="/">Konfinity Blogs</a>
+      </div>
+      <nav>
+        <a href="#" class="hide-desktop">
+          <i class="fas fa-bars" id="menu"></i>
+        </a>
+        <ul class="show-desktop hide-mobile" id="nav">
+          <li id="exit" class="exit-btn hide-desktop">
+            <button><i class="far fa-times-circle"></i></button>
+          </li>
+          <li><a href="/createBlog">Post a new Blog</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/logout">Log Out</a></li>
+        </ul>
       </nav>
-    
-                
-                <header class="masthead" style="background-image: url('img/home-bg.jpg')">
-                    <div class="overlay"></div>
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-lg-8 col-md-10 mx-auto">
-                          <div class="site-heading">
-                            <h1>My Blogs</h1>
-                            <!-- <span class="subheading"><%= name %></span> -->
-                            <!-- <span class="subheading">Your Blogs</span> -->
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </header>
-        
-      
-            
-            <div class="container">
-            <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <% for (i in my_blogs) { %>
-                    <div class="post-preview">
-                    <h2 class="post-title"><%= my_blogs[i].blog_heading %></h2>
-                    <p class="post-meta">Posted by <%= my_blogs[i].name %> on <%= my_blogs[i].createdAt %></p>
-                    <h3 class="post-subtitle"><%= my_blogs[i].blog %></h3>
-                    
-                    <form method = "post" action="/delete">
-					    <button class="button_style" name="id" value="<%= my_blogs[i].id %>">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-                    </form>
-                </div>
-                <hr>
-            <% } %>
-            
-            </div>
-            </div>
-            </div>
+    </header>
+    <div class="main-container">
+      <section id="All-blogs">
+        <div class="heading">
+          Hello <%=my_blogs[i].name%>! Here are all the blogs posted by you.
         </div>
-        <footer>
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto">
-                      <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                          <a href="#">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x"></i>
-                              <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="#">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x"></i>
-                              <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                            </span>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="#">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x"></i>
-                              <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                      <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
-                    </div>
-                  </div>
-                </div>
-              </footer>
-              <script src="vendor/jquery/jquery.min.js"></script>
-              <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            
-              <!-- Custom scripts for this template -->
-              <script src="js/clean-blog.min.js"></script>
-    <body>
+        <div class="allblogs-container">
+          <% for (i in my_blogs) { %>
+
+          <div class="blog">
+            <a><%= my_blogs[i].blog_heading %></a>
+            <p>By <%= my_blogs[i].name %> on <%= my_blogs[i].createdAt %></p>
+
+            <form method="post" action="/delete" class="edit-del">
+              <button><i class="fas fa-edit"></i></button>
+              <button name="id" value="<%= my_blogs[i].id %>">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </form>
+          </div>
+
+          <% } %>
+        </div>
+      </section>
+    </div>
+    <footer>
+      Developed with <i class="fas fa-heart"></i> at
+      <a href="https://www.konfinity.com/" target="_blank">Konfinity</a> by
+      <a href="https://github.com/ThePubDoc" target="_blank">Aayush</a> and
+      <a href="https://github.com/annubv" target="_blank">Anubhav</a>
+    </footer>
+    <script>
+      var menu = document.getElementById("menu");
+      var nav = document.getElementById("nav");
+      var exit = document.getElementById("exit");
+      menu.addEventListener("click", e => {
+        nav.classList.toggle("hide-mobile");
+        e.preventDefault();
+      });
+      exit.addEventListener("click", e => {
+        nav.classList.toggle("hide-mobile");
+        e.preventDefault();
+      });
+    </script>
+  </body>
 </html>

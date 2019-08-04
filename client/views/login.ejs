@@ -1,36 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-
-        <!-- Custom fonts for this template -->
-        <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
-        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href="css/login.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <!-- <link href="css/clean-blog.min.css" rel="stylesheet"> -->
-
-    </head>
-
-    <body>
-        <div class="container">
-            <nav class="navbar">
-                <div class="title">Konfinity Blogs</div>
-            </nav>
-            <div class="login-controller">
-            <form method="POST" action="/login" >
-                <input type="email" name="email" placeholder="email">
-                <input type="password" name="password" placeholder="password">
-                <button>Login</button>
-            </form>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Blogs</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Didact Gothic"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <img src="assets/kflogo.png" alt="logo" class="logo" />
+        <a href="/">Konfinity Blogs</a>
+      </div>
+      <a class="sign" href="/signup">Signup</a>
+    </header>
+    <div class="login-container">
+      <div>
+        <img src="assets/auth.svg" alt="signin" />
+      </div>
+      <h1>Welcome Back!</h1>
+      <form method="POST" action="/login">
+        <div class="form-container">
+          <div>
+            <input
+              class="form-ip"
+              type="email"
+              name="email"
+              placeholder="Enter email"
+            />
+          </div>
+          <div>
+            <input
+              class="form-ip"
+              type="password"
+              name="password"
+              placeholder="Enter password"
+            />
+          </div>
+          <div><input class="form-btn" type="submit" value="Submit" /></div>
         </div>
-            <form method="GET" action="/signup" class="login-controller">
-                <button>Sign Up</button>
-            </form>
-    </body>
+      </form>
+    </div>
+    <footer>
+      Developed with <i class="fas fa-heart"></i> at
+      <a href="https://www.konfinity.com/" target="_blank">Konfinity</a> by
+      <a href="https://github.com/ThePubDoc" target="_blank">Aayush</a> and
+      <a href="https://github.com/annubv" target="_blank">Anubhav</a>
+    </footer>
+  </body>
 </html>

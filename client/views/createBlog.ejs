@@ -1,10 +1,83 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        <form method = "POST" action = "/createBlog">
-            <input type= "text" name="blog_heading" placeholder="Heading">
-            <input type= "text" rows="5" name="blog" placeholder="Enter Blog">
-            <button>Create Blog</button>
-            
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Blogs</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Didact Gothic"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <img src="assets/kflogo.png" alt="logo" class="logo" />
+        <a href="/">Konfinity Blogs</a>
+      </div>
+      <nav>
+        <a href="#" class="hide-desktop">
+          <i class="fas fa-bars" id="menu"></i>
+        </a>
+        <ul class="show-desktop hide-mobile" id="nav">
+          <li id="exit" class="exit-btn hide-desktop">
+            <button><i class="far fa-times-circle"></i></button>
+          </li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/logout">Log Out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="index-bg">
+      <div class="empty-container">
+        <form class="main-container" method="POST" action="/createBlog">
+          <div class="heading">Add a blog</div>
+          <div>
+            <input placeholder="Blog Heading" type="text" name="blog_heading" />
+          </div>
+          <div>
+            <textarea
+              rows="10"
+              placeholder="Blog Content"
+              type="text"
+              name="blog"
+            ></textarea>
+          </div>
+          <div>
+            <button type="submit" value="Submit" class="form-btn2">
+              Submit
+            </button>
+          </div>
         </form>
-    <body>
+      </div>
+    </div>
+    <footer>
+      Developed with <i class="fas fa-heart"></i> at
+      <a href="https://www.konfinity.com/" target="_blank">Konfinity</a> by
+      <a href="https://github.com/ThePubDoc" target="_blank">Aayush</a> and
+      <a href="https://github.com/annubv" target="_blank">Anubhav</a>
+    </footer>
+    <script>
+      var menu = document.getElementById("menu");
+      var nav = document.getElementById("nav");
+      var exit = document.getElementById("exit");
+      menu.addEventListener("click", e => {
+        nav.classList.toggle("hide-mobile");
+        e.preventDefault();
+      });
+      exit.addEventListener("click", e => {
+        nav.classList.toggle("hide-mobile");
+        e.preventDefault();
+      });
+    </script>
+  </body>
 </html>
