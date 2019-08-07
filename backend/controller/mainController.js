@@ -367,9 +367,6 @@ function createComment(req,res){
         const comment = req.body.comment;
         const name = req.session.user.name
         const email = req.session.user.id
-        console.log(blogId)
-        console.log(comment)
-        console.log(req.session.user)
         Comment.create({
             comment,
             name,

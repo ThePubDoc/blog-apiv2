@@ -51,13 +51,14 @@ function comment(id){
       },
     })
     .then(async res => {
-        console.log("total com--",response.result.length)
+        const response = await res.json()
+        console.log("total com--",response)
         let strong = document.createElement("strong")
         let p = document.createElement("p")
         let commentUserText = document.createTextNode(response.name)
         let commentBodyText = document.createTextNode(response.comment.comment)
-        // console.log(commentUserText)
-        // console.log(commentBodyText)
+        console.log(commentUserText)
+        console.log(commentBodyText)
         strong.appendChild(commentUserText)
         p.appendChild(commentBodyText)
         strong.appendChild(p)
