@@ -17,40 +17,42 @@
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <header>
-      <div>
-        <img src="assets/kflogo.png" alt="logo" class="logo" />
-        <a href="/">Konfinity Blogs</a>
-      </div>
-      <a class="sign" href="/signup">Signup</a>
-    </header>
-    <div class="login-container">
-      <div>
-        <img src="assets/auth.svg" alt="signin" />
-      </div>
-      <h1>Welcome Back!</h1>
-      <form method="POST" action="/login">
-        <div class="form-container">
-          <div>
-            <input
-              class="form-ip"
-              type="email"
-              name="email"
-              placeholder="Enter email"
-            />
-          </div>
-          <div>
-            <input
-              class="form-ip"
-              type="password"
-              name="password"
-              placeholder="Enter password"
-            />
-          </div>
-          <div><input class="form-btn" type="submit" value="Submit" /></div>
+  <body class="lg-bg">
+    <div class="content">
+      <header>
+        <div>
+          <img src="assets/kflogo.png" alt="logo" class="logo" />
+          <a href="/">Konfinity Blogs</a>
         </div>
-      </form>
+        <a class="sign" href="/signup">Signup</a>
+      </header>
+      <div class="login-container">
+        <div>
+          <img src="assets/auth.svg" alt="signin" />
+        </div>
+        <h1>Welcome Back!</h1>
+        <form method="POST" action="/login">
+          <div class="form-container">
+            <div>
+              <input
+                class="form-ip"
+                type="email"
+                name="email"
+                placeholder="Enter email"
+              />
+            </div>
+            <div>
+              <input
+                class="form-ip"
+                type="password"
+                name="password"
+                placeholder="Enter password"
+              />
+            </div>
+            <div><input class="form-btn" type="submit" value="Submit" /></div>
+          </div>
+        </form>
+      </div>
     </div>
     <footer>
       Developed with <i class="fas fa-heart"></i> at

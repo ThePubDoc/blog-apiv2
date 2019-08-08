@@ -17,64 +17,66 @@
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <header>
+  <body class="index-bg">
+    <div class="content">
+      <header>
+        <div>
+          <img src="assets/kflogo.png" alt="logo" class="logo" />
+          <a href="/">Konfinity Blogs</a>
+        </div>
+        <nav>
+          <a href="#" class="hide-desktop">
+            <i class="fas fa-bars" id="menu"></i>
+          </a>
+          <ul class="show-desktop hide-mobile" id="nav">
+            <li id="exit" class="exit-btn hide-desktop">
+              <button><i class="far fa-times-circle"></i></button>
+            </li>
+            <li><a href="/createBlog">Post a new Blog</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Log Out</a></li>
+          </ul>
+        </nav>
+      </header>
       <div>
-        <img src="assets/kflogo.png" alt="logo" class="logo" />
-        <a href="/">Konfinity Blogs</a>
-      </div>
-      <nav>
-        <a href="#" class="hide-desktop">
-          <i class="fas fa-bars" id="menu"></i>
-        </a>
-        <ul class="show-desktop hide-mobile" id="nav">
-          <li id="exit" class="exit-btn hide-desktop">
-            <button><i class="far fa-times-circle"></i></button>
-          </li>
-          <li><a href="/createBlog">Post a new Blog</a></li>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/logout">Log Out</a></li>
-        </ul>
-      </nav>
-    </header>
-    <div class="index-bg">
-      <div class="main-container">
-        <section id="Blog-cards">
-          <div class="heading">
-            Hello <%= name %>! Here are the latest blogs
-          </div>
-          <div class="latest-blog-container">
-            <% for (i in blogs) { if (i == 4) { break; } else {%>
+        <div class="main-container">
+          <section id="Blog-cards">
+            <div class="heading">
+              Hello <%= name %>! Here are the featured blogs
+            </div>
+            <div class="latest-blog-container">
+              <% for (i in blogs) { if (i == 4) { break; } else {%>
 
-            <div class="blog-card bg<%=i%>">
-              <div class="blog-heading">
-                <%= blogs[i].blog_heading %>
+              <div class="blog-card bg<%=i%>">
+                <div class="blog-heading">
+                  <%= blogs[i].blog_heading %>
+                </div>
+                <div class="blog-name"><%= blogs[i].name %></div>
+                <div class="blog-button">
+                  <button onclick="blog(<%= blogs[i].id %>)">
+                    Read Full Story
+                  </button>
+                </div>
               </div>
-              <div class="blog-name"><%= blogs[i].name %></div>
-              <div class="blog-button">
-                <button onclick="blog(<%= blogs[i].id %>)">
-                  Read Full Story
-                </button>
-              </div>
+              <% } }%>
             </div>
-            <% } }%>
-          </div>
-        </section>
-        <section id="All-blogs">
-          <%if (blogs.length>4){%>
-          <div class="heading">More Blogs</div>
-          <%}%>
-          <div class="allblogs-container">
-            <%for (var j = 4; j < blogs.length; j++) {%>
-            <div class="blog">
-              <a onclick="blog(<%= blogs[j].id %>)"
-                ><%=blogs[j].blog_heading%></a
-              >
-              <p>By <%= blogs[j].name %></p>
-            </div>
+          </section>
+          <section id="All-blogs">
+            <%if (blogs.length>4){%>
+            <div class="heading">More Blogs</div>
             <%}%>
-          </div>
-        </section>
+            <div class="allblogs-container">
+              <%for (var j = 4; j < blogs.length; j++) {%>
+              <div class="blog">
+                <a onclick="blog(<%= blogs[j].id %>)"
+                  ><%=blogs[j].blog_heading%></a
+                >
+                <p>By <%= blogs[j].name %></p>
+              </div>
+              <%}%>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
     <footer>

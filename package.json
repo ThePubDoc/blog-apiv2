@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThePubDoc/blog-apiv2.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ThePubDoc/blog-apiv2/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/ThePubDoc/blog-apiv2#readme",
+  "homepage": "",
   "dependencies": {
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
